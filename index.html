@@ -180,7 +180,8 @@
 
     .result-page{text-align:center; min-height:100%; display:flex; flex-direction:column}
     .result-head{padding-top:6px}
-    .result-title{font-size:clamp(26px,7.8vw,43px); margin:8px 0 6px; line-height:1.08; color:var(--accent)}
+    .result-title{font-size:clamp(24px,6.8vw,36px); margin:8px 0 6px; line-height:1.18; color:var(--accent); word-break:keep-all; overflow-wrap:normal; line-break:strict}
+    .nowrap{white-space:nowrap}
     .tagline{display:inline-flex; justify-content:center; align-items:center; margin:7px auto 12px; padding:8px 13px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.62); color:#52615f; font-size:13px; font-weight:900}
     .result-desc-card{border:1px solid var(--line); background:rgba(255,255,255,.56); border-radius:24px; padding:15px 16px; text-align:left; box-shadow:0 8px 20px rgba(31,45,43,.04)}
     .badges{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 12px}
@@ -336,6 +337,13 @@
 
     const $ = id => document.getElementById(id);
     const escapeHtml = str => String(str).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    // ใช้ format หัวข้อผลลัพธ์ให้คำสำคัญไม่ถูกตัดกลางคำ เช่น "แชตลับ" ต้องอยู่ติดกันเสมอ
+    function formatResultTitle(title){
+      return escapeHtml(title)
+        .replace(/แชตลับ/g, '<span class="nowrap">แชตลับ</span>')
+        .replace(/Safe Zone/g, '<span class="nowrap">Safe Zone</span>');
+    }
+
     const show = id => {document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});};
 
     function applyDeveloperAssets(){
@@ -465,7 +473,7 @@
       $('resultWrap').innerHTML = `
         <div class="result-head">
           <div class="eyebrow">RESULT</div>
-          <h2 class="result-title">${r.name}</h2>
+          <h2 class="result-title">${formatResultTitle(r.name)}</h2>
           <div class="tagline">${r.tagline}</div>
         </div>
         ${imageFrameHTML(winner, `พื้นที่ภาพผลลัพธ์: ${r.name}`, 'Developer สามารถใส่รูปผ่าน IMAGE_URLS ของผลลัพธ์นี้', 'result-image')}
