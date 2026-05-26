@@ -290,12 +290,14 @@
     // 1) อัปโหลดรูปขึ้น hosting หรือใส่ path ในโปรเจกต์ เช่น images/cover.png
     // 2) ใส่ URL/Path ด้านล่าง คนเล่นเกมทั่วไปจะไม่เห็นปุ่มอัปโหลดหรือแก้รูป
     const IMAGE_URLS = {
-      cover: "",
-      A: "",
-      B: "",
-      C: "",
-      D: "",
-      E: ""
+      // วางรูปทั้งหมดไว้ในโฟลเดอร์ assets/ ระดับเดียวกับไฟล์ index.html
+      // GitHub Pages จะเรียก path ภาษาไทยได้ แต่ต้องสะกดชื่อไฟล์ให้ตรง 100%
+      cover: "assets/ปกควิซ.png",
+      A: "assets/นักสำรวจเมืองคนคุย.png",
+      B: "assets/ผู้พิทักษ์ Safe Zone.png",
+      C: "assets/เจ้าหนูใจอ่อนแห่งแชตลับ.png",
+      D: "assets/นักสืบความกังวล.png",
+      E: "assets/ผู้กล้าขอความชัดเจน.png"
     };
 
     // Developer-only BG setup:
